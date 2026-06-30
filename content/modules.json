@@ -1,0 +1,62 @@
+[
+  {
+    "id": "system-analysis",
+    "title": "Системный анализ",
+    "icon": "📋",
+    "description": "Роль аналитика, требования, процессы, документация",
+    "items": [
+      { "slug": "01-role", "title": "Роль системного аналитика", "description": "Задачи, навыки, зона ответственности", "order": 1 },
+      { "slug": "02-requirements", "title": "Сбор и анализ требований", "description": "Интервью, воркшопы, источники требований", "order": 2 },
+      { "slug": "03-user-stories", "title": "User Stories и Use Cases", "description": "Форматы описания функциональности", "order": 3 },
+      { "slug": "04-bpmn", "title": "Моделирование процессов (BPMN)", "description": "Нотация, элементы, практика", "order": 4 },
+      { "slug": "05-uml", "title": "UML для аналитика", "description": "Диаграммы классов, последовательностей, состояний", "order": 5 },
+      { "slug": "06-api-design", "title": "Проектирование API", "description": "REST, контракты, OpenAPI", "order": 6 },
+      { "slug": "07-documentation", "title": "Документирование", "description": "SRS, BRD, спецификации", "order": 7 },
+      { "slug": "08-test-cases", "title": "Тест-кейсы для аналитика", "description": "Как писать сценарии проверки", "order": 8 },
+      { "slug": "09-stakeholders", "title": "Стейкхолдеры и коммуникация", "description": "Карта стейкхолдеров, RACI", "order": 9 },
+      { "slug": "10-prioritization", "title": "Приоритизация бэклога", "description": "MoSCoW, RICE, value vs effort", "order": 10 }
+    ]
+  },
+  {
+    "id": "api",
+    "title": "API и HTTP",
+    "icon": "🌐",
+    "description": "Запросы, REST, Swagger, работа с контрактами",
+    "items": [
+      { "slug": "01-http-basics", "title": "HTTP: методы и коды ответа", "description": "GET, POST, статусы 2xx–5xx", "order": 1 },
+      { "slug": "02-rest-requests", "title": "REST-запросы на практике", "description": "URL, query, body, headers", "order": 2 },
+      { "slug": "03-openapi-swagger", "title": "OpenAPI и Swagger", "description": "Спецификация, Swagger UI", "order": 3 },
+      { "slug": "04-pagination-errors", "title": "Пагинация и ошибки API", "description": "limit/offset, формат ошибок", "order": 4 },
+      { "slug": "05-api-auth", "title": "Аутентификация API", "description": "API Key, Bearer, OAuth — обзор", "order": 5 },
+      { "slug": "06-api-testing", "title": "Тестирование API", "description": "Postman, curl, контрактное тестирование", "order": 6 }
+    ]
+  },
+  {
+    "id": "databases",
+    "title": "Базы данных",
+    "icon": "🗄️",
+    "description": "Теория, проектирование, SQL",
+    "items": [
+      { "slug": "01-introduction", "title": "Введение в реляционные БД", "description": "Таблицы, ключи, связи", "order": 1 },
+      { "slug": "02-er-model", "title": "ER-моделирование", "description": "Сущности, атрибуты, связи", "order": 2 },
+      { "slug": "03-normalization", "title": "Нормализация", "description": "1NF, 2NF, 3NF на примерах", "order": 3 },
+      { "slug": "04-sql-select", "title": "SQL: SELECT и фильтрация", "description": "Выборка, WHERE, ORDER BY", "order": 4 },
+      { "slug": "05-sql-joins", "title": "SQL: JOIN", "description": "INNER, LEFT, агрегация", "order": 5 },
+      { "slug": "06-indexes", "title": "Индексы и производительность", "description": "Когда и зачем индексировать", "order": 6 },
+      { "slug": "07-transactions", "title": "Транзакции и ACID", "description": "Целостность и изоляция", "order": 7 },
+      { "slug": "08-nosql", "title": "Обзор NoSQL", "description": "Когда реляционная БД не подходит", "order": 8 }
+    ]
+  },
+  {
+    "id": "integration",
+    "title": "Интеграции",
+    "icon": "🔗",
+    "description": "Обмен данными между системами",
+    "items": [
+      { "slug": "01-patterns", "title": "Паттерны интеграции", "description": "Sync/async, ESB, event-driven", "order": 1 },
+      { "slug": "02-messaging", "title": "Очереди и брокеры", "description": "Kafka, RabbitMQ — основы для аналитика", "order": 2 },
+      { "slug": "03-idempotency", "title": "Идемпотентность и надёжность", "description": "Повторы, дедупликация, retry", "order": 3 },
+      { "slug": "04-api-contracts", "title": "API-контракты в интеграциях", "description": "Версионирование, breaking changes", "order": 4 }
+    ]
+  }
+]

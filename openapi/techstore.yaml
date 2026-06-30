@@ -1,0 +1,221 @@
+openapi: 3.0.3
+info:
+  title: TechStore API
+  description: Учебный REST API интернет-магазина для тренажёра системного аналитика
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Локальный сервер разработки
+
+paths:
+  /products:
+    get:
+      summary: Список товаров
+      tags: [Products]
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: string
+          description: Фильтр по названию категории (например, «Ноутбуки»)
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+            maximum: 100
+      responses:
+        '200':
+          description: Список товаров
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  meta:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                      limit:
+                        type: integer
+
+  /products/{id}:
+    get:
+      summary: Товар по ID
+      tags: [Products]
+      parameters:
+        - $ref: '#/components/parameters/ProductId'
+      responses:
+        '200':
+          description: Товар найден
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/ProductDetail'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /customers/{id}:
+    get:
+      summary: Клиент по ID
+      tags: [Customers]
+      parameters:
+        - $ref: '#/components/parameters/CustomerId'
+      responses:
+        '200':
+          description: Клиент найден
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /customers/{id}/orders:
+    get:
+      summary: Заказы клиента
+      tags: [Orders]
+      parameters:
+        - $ref: '#/components/parameters/CustomerId'
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [new, paid, shipped, delivered, cancelled]
+      responses:
+        '200':
+          description: Список заказов
+
+  /orders:
+    post:
+      summary: Создать заказ
+      tags: [Orders]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+            example:
+              customer_id: 1
+              items:
+                - product_id: 10
+                  quantity: 2
+      responses:
+        '201':
+          description: Заказ создан
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Недостаточно товара на складе
+
+  /orders/{id}:
+    get:
+      summary: Заказ с позициями
+      tags: [Orders]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Заказ найден
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  parameters:
+    ProductId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    CustomerId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        sku:
+          type: string
+        price:
+          type: string
+          description: Десятичное число в виде строки
+        stock_qty:
+          type: integer
+        category:
+          type: string
+
+    ProductDetail:
+      allOf:
+        - $ref: '#/components/schemas/Product'
+        - type: object
+          properties:
+            category_id:
+              type: integer
+            created_at:
+              type: string
+              format: date-time
+
+    CreateOrderRequest:
+      type: object
+      required: [customer_id, items]
+      properties:
+        customer_id:
+          type: integer
+        items:
+          type: array
+          minItems: 1
+          items:
+            type: object
+            required: [product_id, quantity]
+            properties:
+              product_id:
+                type: integer
+              quantity:
+                type: integer
+                minimum: 1
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+            code:
+              type: string
+
+  responses:
+    NotFound:
+      description: Ресурс не найден
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Ошибка валидации
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
