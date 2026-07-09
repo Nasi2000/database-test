@@ -59,11 +59,11 @@ INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES
     (8, 8, 1, 7990.00)
 ON CONFLICT DO NOTHING;
 
-INSERT INTO employees (full_name, role, department) VALUES
-    ('Ольга Смирнова', 'Менеджер поддержки', 'Поддержка'),
-    ('Игорь Волков', 'Старший аналитик', 'IT'),
-    ('Мария Лебедева', 'Менеджер продаж', 'Продажи'),
-    ('Алексей Соколов', 'Разработчик', 'IT')
+INSERT INTO employees (full_name, role_id, department) VALUES
+    ('Ольга Смирнова', 1, 'Поддержка'),
+    ('Игорь Волков', 2, 'IT'),
+    ('Мария Лебедева', 1, 'Продажи'),
+    ('Алексей Соколов', 3, 'IT')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO cities (city_name, longitude, latitude) VALUES
@@ -78,13 +78,14 @@ INSERT INTO cities (city_name, longitude, latitude) VALUES
 ('Омск', 73.3686, 54.9924),
 ('Екатеринбург', 60.6122, 56.8519),
 ('Троицк', 61.5773, 54.0979),
-('Хабаровск', 135.084, 48.4827)
+('Хабаровск', 135.084, 48.4827),
+('Казань', 49.1221, 55.7887)
 ON CONFLICT DO NOTHING;
 
-INSERT INTO roles (roles_name) VALUES
-(1),
-(2),
-(3)
+INSERT INTO roles (role_code, role_name) VALUES
+(4519, 'Менеджер поддержки'),
+(1258, 'Старший аналитик'),
+(9653,'Разработчик')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO support_tickets (customer_id, employee_id, subject, status, priority, created_at, resolved_at) VALUES
