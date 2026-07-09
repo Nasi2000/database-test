@@ -66,6 +66,27 @@ INSERT INTO employees (full_name, role, department) VALUES
     ('Алексей Соколов', 'Разработчик', 'IT')
 ON CONFLICT DO NOTHING;
 
+INSERT INTO cities (city_name, longitude, latitude) VALUES
+('Москва', 37.6156, 55.7522),
+('Абакан', 91.4292, 53.7156),
+('Санкт-Петербург', 30.3141, 59.9386),
+('Самара', 50.15, 53.2001),
+('Коломна', 38.7783, 55.0794),
+('Лобня', 37.4819, 56.0097),
+('Новосибирск', 82.9346, 55.0415),
+('Чита', 113.501, 52.0317),
+('Омск', 73.3686, 54.9924),
+('Екатеринбург', 60.6122, 56.8519),
+('Троицк', 61.5773, 54.0979),
+('Хабаровск', 135.084, 48.4827)
+ON CONFLICT DO NOTHING;
+
+INSERT INTO roles (roles_name) VALUES
+(1),
+(2),
+(3)
+ON CONFLICT DO NOTHING;
+
 INSERT INTO support_tickets (customer_id, employee_id, subject, status, priority, created_at, resolved_at) VALUES
     (1, 1, 'Не пришло письмо с подтверждением заказа', 'resolved', 'medium', '2024-07-02 11:00:00', '2024-07-02 15:30:00'),
     (3, 1, 'Вопрос по гарантии на ноутбук', 'in_progress', 'low', '2024-09-02 09:00:00', NULL),
